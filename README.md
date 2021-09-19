@@ -44,8 +44,7 @@ Finish time: **5:00**
 
 ## Credit and Collaborations
 
-[mongo instulation](https://mongoosejs.com/docs
-c/)
+[mongo instulation](https://mongoosejs.com/docs)
 
 ---
 
