@@ -28,7 +28,7 @@ class BestBooks extends React.Component {
     }
   };
 
-  
+
 
   render() {
     /* TODO(Done): render user's books in a Carousel */
@@ -37,23 +37,7 @@ class BestBooks extends React.Component {
       <>
         <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
 
-        {this.state.books.length > 0 ? (
-            this.props.books.map((b, index) => {
-              return(
-                <Book
-                title={b.title}
-                description={b.description}
-                status={b.status}
-                email={b.email}
-                key={index}>
-              </Book>
-
-
-              )
-            }
-        
-        )) : ( <h3>No Books Found :(</h3>
-        )}
+        {this.state.books.length > 0 ? <Book books={this.state.books} /> : (<h3>No Books Found </h3>)}
       </>
     );
   }
