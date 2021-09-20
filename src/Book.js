@@ -1,18 +1,20 @@
 import React, { Component } from "react";
 import Carousel from "react-bootstrap/Carousel";
 import Badge from "react-bootstrap/Badge";
-
 class Book extends Component {
   render() {
     return (
-      <Carousel style={{ hight: "200px" }}>
+      <Carousel style={{
+        width: "1000px",
+        margin: ' 20px auto',
+        height: "400px"
+      }}>
         {this.props.books.map((b, index) => {
           return (
-            <Carousel.Item interval={2000}>
+            <Carousel.Item >
               <img
-                width="1000px"
-                height="500px"
-                style={{ objectFit: "contain" }}
+
+                style={{ objectFit: "cover", height: "400px" }}
                 className="d-block w-100"
                 src="https://wallpaperaccess.com/full/2890760.jpg"
                 alt="First slide"
@@ -34,7 +36,8 @@ class Book extends Component {
                 <Badge style={{ margin: "20px" }} bg="success">
                   {b.status}
                 </Badge>
-                <Badge bg="success">{b.email}</Badge>
+                <Badge bg="success" style={{ margin: "20px" }}>{b.email}</Badge>
+                <Badge bg="success" width='200px' style={{ margin: "20px" }}>{b._id}</Badge>
               </Carousel.Caption>
             </Carousel.Item>
           );
@@ -43,5 +46,4 @@ class Book extends Component {
     );
   }
 }
-
 export default Book;
