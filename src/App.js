@@ -43,12 +43,13 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/">
               {/* TODO(Done): if the user is logged in, render the `BestBooks` component, if they are not, render the `Login` component */}
-              <BestBooks />
+              {/* {this.state.user ? <BestBooks /> : <Login onLoginSubmit={this.loginHandler} handleFormInput={this.formInputHandler} />} */}
             </Route>
             {/* TODO(Done): add a route with a path of '/profile' that renders a `Profile` component */}
             {/* <Route path="/profile">
-              <Profile/>
-            </Route> */}
+            {this.state.user ? <Profile user={this.state.user} /> : <h3>No Profile Found </h3>} */}
+
+            {/* </Route> */}
           </Switch>
           <Footer />
         </Router>
