@@ -3,29 +3,20 @@ import Book from "./Book";
 import axios from "axios";
 import BookFormModal from "./BookFormModal";
 import AddBookButton from "./AddBookButton";
-
 const BOOK_KEY_PORT = process.env.REACT_APP_BACKEND_URL;
-
 class BestBooks extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       books: [],
       showBookFormModal: false,
+      flage: false,
+      delId: ''
     };
   }
-
-  showBookFormModalHandler = () => {
-    this.setState({
-      showBookFormModal: true,
-    });
-  };
-
   /* TODO(Done): Make a GET request to your API to fetch books for the logged in user  */
 
-  componentDidMount() {
-    this.getBooks();
-  }
+
 
   getBooks = async () => {
     const bookServer = `${BOOK_KEY_PORT}/books`;
@@ -33,33 +24,47 @@ class BestBooks extends React.Component {
       const res = await axios.get(bookServer);
       this.setState({ books: res.data });
     } catch (error) {
-      console.log(errorForBook);
+      console.log(error);
     }
   };
+  onButtonClick = () => {
+    this.setState({
+      flag: true
+    })
+  }
+  closeModal = () => {
+    this.setState({
+      flag: false
+    })
+  }
+  updateData = () => {
+    this.getBooks();
 
-  handleCreateNewBook = async (bookData) => {
-    const bookServer = `${BOOK_KEY_PORT}/books`;
-    const res = await axios.post(bookServer, bookData);
-    const newBook = res.data;
-    const books = [...this.state.books, newBook];
-    this.setState({ books });
-  };
+  }
+  deleatOne = (item) => {
+
+    axios.delete(`${process.env.REACT_APP_BACKEND_URL}/del-book/${item}`)
+    this.getBooks();
+  }
 
   render() {
     /* TODO(Done): render user's books in a Carousel */
+    this.getBooks();
 
     return (
-      <>
-        <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
 
+      <div  >
+        <BookFormModal show={this.state.flag} onHide={this.closeModal} updateData={this.updateData} />
+        <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
         {this.state.books.length > 0 ? (
           <Book books={this.state.books} />
         ) : (
           <h3>No Books Found </h3>
         )}
-      </>
+        <AddBookButton onClick={this.onButtonClick} delet={this.deleatOne} updateData={this.updateData} />
+
+      </div>
     );
   }
 }
-
 export default BestBooks;
